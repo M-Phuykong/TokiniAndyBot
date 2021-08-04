@@ -1,6 +1,6 @@
 # TokiniAndyBot
 
-A simple bot made to replace ProBot on the TokiniAndy Discord Server. <br/>
+A simple bot made to replace ProBot on the Tokini Andy Discord Server. <br/>
 Server Link: https://discord.gg/43P2m5VM6v
 
 **Pictures**:
