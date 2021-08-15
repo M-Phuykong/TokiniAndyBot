@@ -3,9 +3,8 @@
 
 import json
 
-f = open('strings.json', encoding="utf8")
-string = json.load(f)
-f.close()
+with open('strings.json', encoding="utf8") as f:
+    string = json.load(f)
 
 def getString(str):
     if not string[str]:

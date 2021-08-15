@@ -16,8 +16,8 @@ from discord import Guild
 class Greeting(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
-		self.font = ImageFont.truetype(os.path.join(os.getcwd(),'Font\SitkaB.ttc'), 72)
-		self.smallfont = ImageFont.truetype(os.path.join(os.getcwd(),'Font\STKAITI.TTF'), 70)
+		self.font = ImageFont.truetype('Font/DENGB.TTF',size=72)
+		self.smallfont = ImageFont.truetype('Font/STKAITI.TTF',size=70)
 
 		
 	@commands.Cog.listener()
@@ -34,7 +34,7 @@ class Greeting(commands.Cog):
 		pfp = Image.open(data).convert("RGB")
 		pfp = ImageOps.fit(pfp, mask.size, centering=(0.5, 0.5))
 
-		card_img.paste(pfp, (580,30), mask)
+		card_img.paste(pfp, (600,30), mask)
 
 		#Draw text
 		im_draw = ImageDraw.Draw(card_img)
