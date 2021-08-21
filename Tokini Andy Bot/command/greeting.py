@@ -24,8 +24,8 @@ class Greeting(commands.Cog):
 	async def on_member_join(self, member):
 		channel = member.guild.system_channel
 		
-		card_img = Image.open(os.path.join(os.getcwd(),'Image\greetingcard.png')).convert("RGB")
-		mask  = Image.open(os.path.join(os.getcwd(),'Image\mask.png')).convert("L")
+		card_img = Image.open(os.path.join(os.getcwd(),'Image/greetingcard.png')).convert("RGB")
+		mask  = Image.open(os.path.join(os.getcwd(),'Image/mask.png')).convert("L")
 		mask = mask.resize((300,300))
 
 		#Get User's profile and then resize it to fit mask
@@ -39,20 +39,22 @@ class Greeting(commands.Cog):
 		#Draw text
 		im_draw = ImageDraw.Draw(card_img)
 		im_draw.text((card_img.width/2,400),member.name,font = self.font,fill=(255,255,255,255), anchor="ms")
-		im_draw.text((375,650),strings.getString("bannerGreetingMessage").encode("UTF-8"),font=self.smallfont,fill=(255,255,255,255))
+		im_draw.text((375,650),strings.getString("bannerGreetingMessage"),font=self.smallfont,fill=(255,255,255,255))
 
 		card_img.save("greeting.png")
 		await channel.send(file = discord.File("greeting.png"))
 		await channel.send(f'Welcome {member.mention}!')
 
-		role = discord.utils.get(member.guild.roles, name = strings.getString("startRole") )
-		await member.add_roles(role)
-
-
 		try:
 			os.remove("greeting.png")
 		except Exception as e:
 			print(f"Error: {e}")
+
+	@commands.Cog.listener()
+	async def on_member_update(self, before, after):
+		if before.pending != after.pending:
+			role = discord.utils.get(before.guild.roles, name = strings.getString("startRole") )
+			await after.add_roles(role)
 
 def setup(bot):
 	bot.add_cog(Greeting(bot))
