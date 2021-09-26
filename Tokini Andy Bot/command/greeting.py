@@ -16,7 +16,7 @@ from discord import Guild
 class Greeting(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
-		self.font = ImageFont.truetype('Font/DENGB.TTF',size=72)
+		self.font = ImageFont.truetype('Font/DENGB.TTF',size=73)
 		self.smallfont = ImageFont.truetype('Font/STKAITI.TTF',size=70)
 
 		
