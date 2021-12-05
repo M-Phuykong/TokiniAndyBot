@@ -1,14 +1,4 @@
 {
-    "guildID": 589645807284781070,
-    "adminRoleID": 589646526222041114,
     "bannerGreetingMessage": "Welcome to the ときに家族!",
-    "startRole": "ToKini Learner",
-    "roleMessageID": 897335391131168779,
-    "textbookEmoji":{
-        "Genki1": "📙",
-        "Genki2": "📗",
-        "Quartet1": "📕",
-        "Quarte2": "📘",
-        "Other": "📚"
-    }
+    "startRole": "ToKini Learner"
 }

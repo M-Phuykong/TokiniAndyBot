@@ -2,11 +2,14 @@
 import discord
 import os
 
+from discord import guild
+from discord.ext.commands.errors import DisabledCommand
 import strings
 from discord.ext import commands
 from PIL import Image, ImageOps, ImageDraw, ImageFont
 from io import BytesIO
 
+from discord import Guild
 
 
 
