@@ -12,4 +12,4 @@ Pictures
 
 Requirements
 ------------
-You will need Python 3.10 or later to use Pattern Matching
+
