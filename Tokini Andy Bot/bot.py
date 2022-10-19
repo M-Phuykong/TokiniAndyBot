@@ -17,7 +17,7 @@ PREFIX = config['PREFIX']
 # Set permission for bot(Changed after v1.5.0)
 intent = Intents.default()
 intent.members = True
-
+intent.message_content = True
 
 bot = commands.Bot(
 	command_prefix=PREFIX,
