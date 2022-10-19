@@ -51,6 +51,6 @@ async def on_ready():
 
 
 try:
-	bot.run(TOKEN, bot = True)
+	bot.run(TOKEN)
 except Exception as e:
 	print(f"Error: {e}")
