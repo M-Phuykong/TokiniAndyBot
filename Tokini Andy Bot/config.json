@@ -1,7 +1,8 @@
 {
-	"DISCORD_TOKEN": "TOKEN", 
-	"PREFIX" : "!tk"
-
-
-
+	"DISCORD_TOKEN": "ODY3NDYxOTc2MDc3NjMxNTY5.G_ynSJ.s7DFVlTQ4r3uIJsnijrcB5cJoJzNcVdbCjFlGM", 
+	"PREFIX" : "!tk",
+	"GREETING_CHANNEL": "968429528076648458",
+	"BANNER_GREETING_MESSAGE": "Welcome to the ときに家族!",
+    "START_ROLE": "ToKini Learner"
 }
+
