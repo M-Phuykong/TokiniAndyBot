@@ -3,6 +3,7 @@ import json
 import discord
 from discord.ext import commands
 from discord.flags import Intents
+from discord.message import Message
 
 # Opening and extracting JSON file
 with open('config.json', encoding="utf8") as f:
@@ -11,6 +12,11 @@ with open('config.json', encoding="utf8") as f:
 # Const
 TOKEN = config['DISCORD_TOKEN']
 PREFIX = config['PREFIX']
+
+# general: 589645807284781088
+# jp-questions: 1019707862693457940
+# study-group: 964010823863369748
+INCLUDE_CHANNEL = {589645807284781088, 1019707862693457940, 964010823863369748}
 
 class TokiniAndyBot(commands.Bot):
 
@@ -44,6 +50,14 @@ class TokiniAndyBot(commands.Bot):
 	async def change_presence() -> None:
 		return await super().change_presence(activity=discord.Activity(name="TokiniAndy", 
 														type=discord.ActivityType.watching))
+	
+	async def on_message(self, message: Message, /) -> None:
+		if message.channel.id in INCLUDE_CHANNEL:
+			with open("log.txt", "a") as f:
+				f.writelines(f"{message.content}\n")
+		return await super().on_message(message)
+
+
 
 bot = TokiniAndyBot()
 bot.run(TOKEN)
