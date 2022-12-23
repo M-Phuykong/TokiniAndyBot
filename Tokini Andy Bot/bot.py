@@ -10,6 +10,7 @@ with open('config.json', encoding="utf8") as f:
 	config = json.load(f)
 
 # Const
+#
 TOKEN = config['DISCORD_TOKEN']
 PREFIX = config['PREFIX']
 
@@ -32,7 +33,7 @@ class TokiniAndyBot(commands.Bot):
 		# Uses the Cog from Discord API
 		# Git Example [https://gist.github.com/EvieePy/d78c061a4798ae81be9825468fe146be]
 		# Get command
-		self.initial_extensions = ['command.test', 'command.greeting']
+		self.initial_extensions = ['command.test', 'command.greeting', 'command.jp_question_reply']
 		
 	# this gets call before the bot logins 
 	#
@@ -54,7 +55,9 @@ class TokiniAndyBot(commands.Bot):
 	async def on_message(self, message: Message, /) -> None:
 		if message.channel.id in INCLUDE_CHANNEL:
 			with open("log.txt", "a") as f:
-				f.writelines(f"{message.content}\n")
+				mes = message.content
+				mes.strip().replace(",", " ")
+				f.writelines(f"{mes}\n")
 		return await super().on_message(message)
 
 
