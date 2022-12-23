@@ -1,4 +1,3 @@
-import discord
 from discord.ext import commands
 from discord.message import Message
 from discord.threads import Thread
@@ -23,7 +22,12 @@ class JPQuestionReply(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message: Message) -> None:
 
+        author_id = [m.author.id async for m in message.channel.history()]
+        
         if message.author.id == self.bot.user.id:
+            return
+
+        if self.bot.user.id in author_id:
             return
 
         if type(message.channel) is Thread:
