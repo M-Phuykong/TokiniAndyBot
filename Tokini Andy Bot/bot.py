@@ -3,14 +3,21 @@ import json
 import discord
 from discord.ext import commands
 from discord.flags import Intents
+from discord.message import Message
 
 # Opening and extracting JSON file
 with open('config.json', encoding="utf8") as f:
 	config = json.load(f)
 
 # Const
+#
 TOKEN = config['DISCORD_TOKEN']
 PREFIX = config['PREFIX']
+
+# general: 589645807284781088
+# jp-questions: 1019707862693457940
+# study-group: 964010823863369748
+INCLUDE_CHANNEL = {589645807284781088, 1019707862693457940, 964010823863369748}
 
 class TokiniAndyBot(commands.Bot):
 
@@ -26,7 +33,7 @@ class TokiniAndyBot(commands.Bot):
 		# Uses the Cog from Discord API
 		# Git Example [https://gist.github.com/EvieePy/d78c061a4798ae81be9825468fe146be]
 		# Get command
-		self.initial_extensions = ['command.test', 'command.greeting']
+		self.initial_extensions = ['command.test', 'command.greeting', 'command.jp_question_reply']
 		
 	# this gets call before the bot logins 
 	#
@@ -44,6 +51,16 @@ class TokiniAndyBot(commands.Bot):
 	async def change_presence() -> None:
 		return await super().change_presence(activity=discord.Activity(name="TokiniAndy", 
 														type=discord.ActivityType.watching))
+	
+	async def on_message(self, message: Message, /) -> None:
+		if message.channel.id in INCLUDE_CHANNEL:
+			with open("log.txt", "a") as f:
+				mes = message.content
+				mes.strip().replace(",", " ")
+				f.writelines(f"{mes}\n")
+		return await super().on_message(message)
+
+
 
 bot = TokiniAndyBot()
 bot.run(TOKEN)

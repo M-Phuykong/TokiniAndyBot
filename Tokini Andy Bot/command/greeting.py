@@ -4,7 +4,6 @@ import json
 from io import BytesIO
 
 import discord
-from discord import Guild, guild
 from discord.ext import commands
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
