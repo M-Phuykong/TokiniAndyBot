@@ -10,6 +10,7 @@ It usually takes some time for someone to get back to you.
 In the mean time:
 ・Make sure you've searched jisho.org
 ・Do a search on google. Ex: これ vs それ
+・Check <#746332929361182801> to see if there might be an answer to your question.
 
 Please let us know if you've already found your answer by adding the ANSWERED tag.
 """

@@ -19,12 +19,17 @@ PREFIX = config['PREFIX']
 # study-group: 964010823863369748
 INCLUDE_CHANNEL = {589645807284781088, 1019707862693457940, 964010823863369748}
 
+WATCHING_ACTIVITY = discord.Activity(name="Tokini Andy", 
+					url="https://www.youtube.com/watch?v=1ZKkPxncjLw",
+					type=discord.ActivityType.watching)
+
 class TokiniAndyBot(commands.Bot):
 
 	def __init__(self) -> None:
 		super().__init__(
 				PREFIX, 
 				description = "A Simple Bot for the TokiniAndy Discord Group", 
+				activity = WATCHING_ACTIVITY,
 				intents = Intents.all(),
 				allowed_mentions=discord.AllowedMentions.all(), # Everyone/Users/Roles/Replied_User
 				case_insensitive=True,
@@ -48,10 +53,6 @@ class TokiniAndyBot(commands.Bot):
 	async def on_ready(self):
 		print(f'{self.user} has connected to Discord!')
 
-	async def change_presence() -> None:
-		return await super().change_presence(activity=discord.Activity(name="TokiniAndy", 
-														type=discord.ActivityType.watching))
-	
 	async def on_message(self, message: Message, /) -> None:
 		if message.channel.id in INCLUDE_CHANNEL:
 			with open("log.txt", "a") as f:
