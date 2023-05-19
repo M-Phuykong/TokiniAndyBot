@@ -27,27 +27,40 @@ class ReplyMessage(commands.Cog):
 
     def __init__(self, bot) -> None:
         self.bot = bot
+        self.introduce_yourself_hashmap = set()
 
     @commands.Cog.listener()
     async def on_message(self, message: Message) -> None:
 
-        author_id = [m.author.id async for m in message.channel.history()]
 
-        if message.author.id == self.bot.user.id:
-            return
+        author_id = set([m.author.id async for m in message.channel.history()])
 
-        if self.bot.user.id in author_id:
+        # exit if message is from bot
+        #
+        if message.author.bot:
             return
 
         if type(message.channel) is Thread:
+
             if message.channel.parent.name == "japanese-questions":
+
+                # return if bot already replied
+                #
+                if self.bot.user.id in author_id:
+                    return
 
                 await message.channel.send(JP_MESSAGE
                                 .format(channel_id = JP_QUESTION_CHANNEL_ID))
+
         if type(message.channel) is TextChannel:
 
+            if message.author.id in self.introduce_yourself_hashmap:
+                return
+
             if message.channel.id == INTRODUCE_YOURSELF_CHANNEL_ID:
+                self.introduce_yourself_hashmap.add(message.author.id)
                 await message.channel.send(INTRODUCE_YOURSELF_REPLY.format(member_mention = message.author.mention))
+
 
 async def setup(bot):
     await bot.add_cog(ReplyMessage(bot))
