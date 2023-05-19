@@ -19,7 +19,7 @@ PREFIX = config['PREFIX']
 # study-group: 964010823863369748
 INCLUDE_CHANNEL = {589645807284781088, 1019707862693457940, 964010823863369748}
 
-WATCHING_ACTIVITY = discord.Activity(name="Tokini Andy", 
+WATCHING_ACTIVITY = discord.Activity(name="Tokini Andy",
 					url="https://www.youtube.com/watch?v=1ZKkPxncjLw",
 					type=discord.ActivityType.watching)
 
@@ -27,25 +27,25 @@ class TokiniAndyBot(commands.Bot):
 
 	def __init__(self) -> None:
 		super().__init__(
-				PREFIX, 
-				description = "A Simple Bot for the TokiniAndy Discord Group", 
+				PREFIX,
+				description = "A Simple Bot for the TokiniAndy Discord Group",
 				activity = WATCHING_ACTIVITY,
 				intents = Intents.all(),
 				allowed_mentions=discord.AllowedMentions.all(), # Everyone/Users/Roles/Replied_User
 				case_insensitive=True,
 				strip_after_prefix=True)
-		
+
 		# Uses the Cog from Discord API
 		# Git Example [https://gist.github.com/EvieePy/d78c061a4798ae81be9825468fe146be]
 		# Get command
-		self.initial_extensions = ['command.test', 'command.greeting', 'command.jp_question_reply']
-		
-	# this gets call before the bot logins 
+		self.initial_extensions = ['command.test', 'command.greeting', 'command.reply_to_message']
+
+	# this gets call before the bot logins
 	#
 	async def setup_hook(self):
 		for ext in self.initial_extensions:
 			await self.load_extension(ext)
-	
+
 	async def close(self):
 		await super.close()
 		await self.session.close()
