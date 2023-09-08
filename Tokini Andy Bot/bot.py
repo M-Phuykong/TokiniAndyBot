@@ -1,4 +1,5 @@
 import json
+import requests
 
 import discord
 from discord.ext import commands
@@ -23,12 +24,15 @@ WATCHING_ACTIVITY = discord.Activity(name="Tokini Andy",
 					url="https://www.youtube.com/watch?v=1ZKkPxncjLw",
 					type=discord.ActivityType.watching)
 
+API_URL = "https://api-inference.huggingface.co/models/facebook/roberta-hate-speech-dynabench-r4-target"
+headers = {"Authorization": "Bearer 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"}
+
 class TokiniAndyBot(commands.Bot):
 
 	def __init__(self) -> None:
 		super().__init__(
 				PREFIX,
-				description = "A Simple Bot for the TokiniAndy Discord Group",
+				description = "Bot for the TokiniAndy Discord Group",
 				activity = WATCHING_ACTIVITY,
 				intents = Intents.all(),
 				allowed_mentions=discord.AllowedMentions.all(), # Everyone/Users/Roles/Replied_User
@@ -38,7 +42,11 @@ class TokiniAndyBot(commands.Bot):
 		# Uses the Cog from Discord API
 		# Git Example [https://gist.github.com/EvieePy/d78c061a4798ae81be9825468fe146be]
 		# Get command
-		self.initial_extensions = ['command.test', 'command.greeting', 'command.reply_to_message']
+		self.initial_extensions = [
+			'command.test',
+			'command.greeting',
+			'command.reply_to_message',
+			'command.study_group_scheduler',]
 
 	# this gets call before the bot logins
 	#
@@ -53,14 +61,22 @@ class TokiniAndyBot(commands.Bot):
 	async def on_ready(self):
 		print(f'{self.user} has connected to Discord!')
 
-	async def on_message(self, message: Message, /) -> None:
-		if message.channel.id in INCLUDE_CHANNEL:
-			with open("log.txt", "a") as f:
-				mes = message.content
-				mes.strip().replace(",", " ")
-				f.writelines(f"{mes}\n")
-		return await super().on_message(message)
 
+	async def query(self, payload):
+		response = requests.post(API_URL, headers=headers, json=payload)
+		return response.json()
+
+	async def on_message(self, message: Message, /) -> None:
+
+		# output = await self.query({
+		# 	"inputs": message.content,
+		# 	"wait_for_model": True
+		# })
+		# if (output[0][0]['label'] == "hate" and output[0][0]['score']>= 0.85) \
+		# 	or (output[0][1]['label'] == "hate" and output[0][1]['score'] >= 0.85):
+		# 	return await message.delete()
+
+		return await super().on_message(message)
 
 
 bot = TokiniAndyBot()

@@ -18,7 +18,7 @@ Please let us know if you've already found your answer by adding the ANSWERED ta
 """
 
 INTRODUCE_YOURSELF_REPLY = """
-Hi {member_mention}, welcome to the Tokini Andy Discord server! Thank you for the post. Please make sure to check out <#746332929361182801> for study tips / tools. Also checkout the <#801325713088315433> for server tags. for questions please post in <#1019707862693457940> (please look at pinned comments for optimal guide. Good luck to your learning.
+Hi {member_mention}, welcome to the Tokini Andy Discord server! Thank you for the post. Please make sure to check out <#746332929361182801> for study tips / tools. Also checkout the <#801325713088315433> for server tags. For questions please post in <#1019707862693457940> (please look at pinned comments for optimal guide. Good luck in your learning.
 """
 
 
